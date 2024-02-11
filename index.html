@@ -10,8 +10,11 @@
 <body>
     <div class="app-body">
     <header>
-        <form class= "search-bar">
-            <input type="search" placeholder="Enter a city..." class= "search-bar-box">
+        <form class= "search-bar" id="search-bar">
+            <input type="search" 
+            placeholder="Enter a city..." 
+            required
+            class= "search-bar-box" id= "search-bar-box">
             <input type="submit" value="search" class= "search-bar-button">
         </form>
     </header>
@@ -19,7 +22,7 @@
     <main>
         <div class="weather-data">
         <div>
-    <h1 class="weather-data-city">London</h1>
+    <h1 class="weather-data-city" id= "weather-city">London</h1>
     <p class="weather-data-details">
         Monday 17:30, heavy rain 
         <br>
