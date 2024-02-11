@@ -10,8 +10,10 @@ function getWeather(response) {
   currentHumidity.innerHTML = Math.round(humidity);
   let currentWind = document.querySelector("strong.wind");
   let wind = response.data.wind.speed;
-  currentWind.innerHTML = (wind);
-
+  currentWind.innerHTML = Math.round(wind);
+  let currentConditions = document.querySelector("#condition");
+  let conditions = response.data.condition.description;
+  currentConditions.innerHTML = (conditions);
 }
 
 
