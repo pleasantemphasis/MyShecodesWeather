@@ -6,7 +6,11 @@ function getWeather(response) {
   let currentHumidityElement = document.querySelector("strong.humidity");
   let currentWindElement = document.querySelector("strong.wind");
   let currentConditionsElement = document.querySelector("#condition");
-  let currentIconElement = document.querySelector("#currentTemperatureIcon");
+  let currentTimeElement = document.querySelector("#time");
+  let date = new Date(response.data.time * 1000);
+  let currentIconElement = document.querySelector("#current-temperature-icon");
+
+  console.log(response.data);
 
 
   cityInput.innerHTML = response.data.city;
@@ -23,16 +27,9 @@ function getWeather(response) {
   let conditions = response.data.condition.description;
   currentConditionsElement.innerHTML = (conditions);
 
-  currentIconElement.innerHTML =    
-  `<img src="${response.data.condition.icon_url}" class="current-temperature-icon"/>` 
+  currentTimeElement.innerHTML = formatDate(date);
 
-  let date = new Date(response.data.time * 1000);
-  let currentDateElement = document.querySelector("#time");
-  currentDateElement.innerHTML = formatDate(date);
-  console.log(response.data);
-
-  
-  
+  currentIconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="current-temperature-icon" />;`;
 }
 
 function formatDate(date) {

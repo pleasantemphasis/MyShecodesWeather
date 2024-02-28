@@ -64,7 +64,7 @@ justify-content: space-between;
 }
 .current-temperature-icon {
     position: relative;
-    top: 0;
+    top: 10px;
     width: 75px;
     height: 75px;
     margin-right: 10px;
