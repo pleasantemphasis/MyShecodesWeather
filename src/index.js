@@ -10,9 +10,6 @@ function getWeather(response) {
   let date = new Date(response.data.time * 1000);
   let currentIconElement = document.querySelector("#current-temperature-icon");
 
-  console.log(response.data);
-
-
   cityInput.innerHTML = response.data.city;
 
   let temperature = response.data.temperature.current;
@@ -27,9 +24,10 @@ function getWeather(response) {
   let conditions = response.data.condition.description;
   currentConditionsElement.innerHTML = (conditions);
 
-  currentTimeElement.innerHTML = formatDate(date);
+  console.log(response)
 
-  currentIconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="current-temperature-icon" />;`;
+  currentTimeElement.innerHTML = formatDate(date);
+  currentIconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="current-temperature-icon" />`;
 }
 
 function formatDate(date) {
@@ -39,7 +37,7 @@ let days = [
 "Sunday",
 "Monday",
 "Tuesday",
-"Wedensday",
+"Wednesday",
 "Thursday",
 "Friday",
 "Saturday"];
