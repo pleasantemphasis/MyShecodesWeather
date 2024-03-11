@@ -25,7 +25,19 @@ function getWeather(response) {
   currentTimeElement.innerHTML = formatDate(date);
   currentIconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="current-temperature-icon" />`;
   getForecast(response.data.city);
+
+  if (date.getHours() <12) {
+    let background = document.querySelector("body");
+    background.classList.add("morning-gradient");
+  } else if (date.getHours() >= 12 || date.getHours() <18) {
+    let background = document.querySelector("body");
+    background.classList.add("day-gradient");
+  } else if (date.getHours() >= 18) {
+    let background = document.querySelector("body");
+    background.classList.add("night-gradient");
+  }
 }
+
 
 function formatDate(date) {
   let minutes = date.getMinutes();
@@ -46,7 +58,6 @@ function formatDate(date) {
   }
 
   return `${day}, ${hours}:${minutes}`;
-  
 }
 
 function search(city) {
@@ -55,7 +66,6 @@ function search(city) {
   axios.get(apiUrl).then(getWeather);
 }
 
-
 function searchBarInput(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-bar-box");
@@ -63,26 +73,26 @@ function searchBarInput(event) {
 }
 
 function getForecast(city) {
-let apiKey = "a3425b1067eb6bfaf0f312bt33bce3o1";
-let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metrics`;
-axios(apiUrl).then(displayForecast);
+  let apiKey = "a3425b1067eb6bfaf0f312bt33bce3o1";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metrics`;
+  axios(apiUrl).then(displayForecast);
 }
 
 function formatDay(timestamp) {
   let date = new Date(timestamp * 10000);
   let days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 
-return days[date.getDay()];
+  return days[date.getDay()];
 }
 
 function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   let forecastHtml = "";
   response.data.daily.forEach(function (day, index) {
-    if (index <5) {
-    forecastHtml = 
-    forecastHtml +
-    `
+    if (index < 5) {
+      forecastHtml =
+        forecastHtml +
+        `
 <div class="row">
 <div class="coloumns">
   <div class="forecast-day">${formatDay(day.time)}</div>
@@ -91,18 +101,20 @@ function displayForecast(response) {
     alt="${day.condition.description}" 
   />
   <div class="forecast-temperatures" id="forecast">
-    <span class="forecast-temperature-max">${Math.round(day.temperature.maximum)}° </span>
-    <span class="forecast-temperature-min"> ${Math.round(day.temperature.minimum)}° </span>
+    <span class="forecast-temperature-max">${Math.round(
+      day.temperature.maximum
+    )}° </span>
+    <span class="forecast-temperature-min"> ${Math.round(
+      day.temperature.minimum
+    )}° </span>
   </div>
 </div>
 </div>
 `;
-}
-console.log(day);
+    }
   });
   forecastElement.innerHTML = forecastHtml;
 }
-
 
 let searchBarElement = document.querySelector("#search-bar");
 searchBarElement.addEventListener("submit", searchBarInput);
