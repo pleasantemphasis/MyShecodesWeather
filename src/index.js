@@ -26,10 +26,11 @@ function getWeather(response) {
   currentIconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="current-temperature-icon" />`;
   getForecast(response.data.city);
 
-  if (date.getHours() <12) {
+
+  if (date.getHours() < 12) {
     let background = document.querySelector("body");
     background.classList.add("morning-gradient");
-  } else if (date.getHours() >= 12 || date.getHours() <18) {
+  } else if (date.getHours() >= 12 && date.getHours() <18) {
     let background = document.querySelector("body");
     background.classList.add("day-gradient");
   } else if (date.getHours() >= 18) {
